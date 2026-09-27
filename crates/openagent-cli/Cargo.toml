@@ -1,0 +1,34 @@
+[package]
+name = "openagent-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "CLI tool for the OpenAgent Agent OS"
+
+[[bin]]
+name = "openagent"
+path = "src/main.rs"
+
+[dependencies]
+openagent-types = { path = "../openagent-types" }
+openagent-kernel = { path = "../openagent-kernel" }
+openagent-api = { path = "../openagent-api" }
+openagent-migrate = { path = "../openagent-migrate" }
+openagent-skills = { path = "../openagent-skills" }
+openagent-extensions = { path = "../openagent-extensions" }
+zeroize = { workspace = true }
+tokio = { workspace = true }
+clap = { workspace = true }
+clap_complete = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+toml = { workspace = true }
+dirs = { workspace = true }
+reqwest = { workspace = true, features = ["blocking"] }
+openagent-runtime = { path = "../openagent-runtime" }
+uuid = { workspace = true }
+ratatui = { workspace = true }
+colored = { workspace = true }
+tempfile = { workspace = true }
