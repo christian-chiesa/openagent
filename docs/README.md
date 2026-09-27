@@ -28,7 +28,7 @@ Welcome to the OpenAgent documentation. OpenAgent is the open-source Agent Opera
 |-------|-------------|
 | [Channel Adapters](channel-adapters.md) | 40 messaging channels -- setup, configuration, custom adapters |
 | [LLM Providers](providers.md) | 20 providers, 51 models, 23 aliases -- setup and model routing |
-| [Skills](skill-development.md) | 60 bundled skills, custom skill development, FangHub marketplace |
+| [Skills](skill-development.md) | 60 bundled skills, custom skill development, AgentHub marketplace |
 | [MCP & A2A](mcp-a2a.md) | Model Context Protocol and Agent-to-Agent protocol integration |
 
 ## Reference

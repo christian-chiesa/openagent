@@ -344,7 +344,7 @@ enum MigrateSourceArg {
 
 #[derive(Subcommand)]
 enum SkillCommands {
-    /// Install a skill from FangHub or a local directory.
+    /// Install a skill from AgentHub or a local directory.
     Install {
         /// Skill name, local path, or git URL.
         source: String,
@@ -356,7 +356,7 @@ enum SkillCommands {
         /// Skill name.
         name: String,
     },
-    /// Search FangHub for skills.
+    /// Search AgentHub for skills.
     Search {
         /// Search query.
         query: String,
@@ -3700,8 +3700,8 @@ fn cmd_skill_install(source: &str) {
         );
         notify_daemon_skill_reload();
     } else {
-        // Remote install from FangHub
-        println!("Installing {source} from FangHub...");
+        // Remote install from AgentHub
+        println!("Installing {source} from AgentHub...");
         let rt = tokio::runtime::Runtime::new().unwrap();
         let client = openagent_skills::marketplace::MarketplaceClient::new(
             openagent_skills::marketplace::MarketplaceConfig::default(),

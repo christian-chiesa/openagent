@@ -378,7 +378,7 @@ openagent trigger delete <id>           # Delete a trigger
 
 openagent skill install <source>        # Install a skill
 openagent skill list                    # List installed skills
-openagent skill search <query>          # Search FangHub
+openagent skill search <query>          # Search AgentHub
 openagent skill create                  # Scaffold a new skill
 
 openagent channel list                  # List channel status

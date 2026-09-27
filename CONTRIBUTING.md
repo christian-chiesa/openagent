@@ -142,7 +142,7 @@ OpenAgent is organized as a Cargo workspace with 14 crates:
 | `openagent-wire` | OFP (OpenAgent Protocol): TCP P2P networking with HMAC-SHA256 mutual authentication |
 | `openagent-cli` | Clap CLI with daemon auto-detect (HTTP mode vs. in-process fallback), MCP server |
 | `openagent-migrate` | Migration engine for importing from OpenClaw (and future frameworks) |
-| `openagent-skills` | Skill system: 60 bundled skills, FangHub marketplace, OpenClaw compatibility, prompt injection scanning |
+| `openagent-skills` | Skill system: 60 bundled skills, AgentHub marketplace, OpenClaw compatibility, prompt injection scanning |
 | `openagent-desktop` | Tauri 2.0 native desktop app (WebView + system tray + single-instance + notifications) |
 | `xtask` | Build automation tasks |
 
