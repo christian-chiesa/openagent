@@ -198,10 +198,7 @@ fn verify_meta_signature(app_secret: &str, body: &[u8], signature: &str) -> bool
     mac.verify_slice(&signature).is_ok()
 }
 
-fn verify_webhook_challenge(
-    query: &HashMap<String, String>,
-    verify_token: &str,
-) -> Option<String> {
+fn verify_webhook_challenge(query: &HashMap<String, String>, verify_token: &str) -> Option<String> {
     let mode = query.get("hub.mode").map(String::as_str).unwrap_or("");
     let token = query
         .get("hub.verify_token")
@@ -327,14 +324,15 @@ fn parse_whatsapp_webhook(
                 if message["type"].as_str() != Some("text") {
                     continue;
                 }
-                let Some(phone) = message["from"].as_str().filter(|phone| !phone.is_empty())
-                else {
+                let Some(phone) = message["from"].as_str().filter(|phone| !phone.is_empty()) else {
                     continue;
                 };
                 if !is_allowed_phone(allowed_users, phone) {
                     continue;
                 }
-                let Some(text) = message["text"]["body"].as_str().filter(|text| !text.is_empty())
+                let Some(text) = message["text"]["body"]
+                    .as_str()
+                    .filter(|text| !text.is_empty())
                 else {
                     continue;
                 };
@@ -342,9 +340,9 @@ fn parse_whatsapp_webhook(
                 let display_name = value["contacts"]
                     .as_array()
                     .and_then(|contacts| {
-                        contacts.iter().find(|contact| {
-                            contact["wa_id"].as_str() == Some(phone)
-                        })
+                        contacts
+                            .iter()
+                            .find(|contact| contact["wa_id"].as_str() == Some(phone))
                     })
                     .and_then(|contact| contact["profile"]["name"].as_str())
                     .unwrap_or(phone)
@@ -425,7 +423,9 @@ impl ChannelAdapter for WhatsAppAdapter {
         }
 
         if self.app_secret.is_empty() {
-            return Err("WhatsApp Cloud API requires an app secret for webhook signature validation".into());
+            return Err(
+                "WhatsApp Cloud API requires an app secret for webhook signature validation".into(),
+            );
         }
         if self.access_token.is_empty() {
             return Err("WhatsApp Cloud API requires an access token".into());
@@ -453,7 +453,13 @@ impl ChannelAdapter for WhatsAppAdapter {
             let tx = std::sync::Arc::new(tx);
             let seen_message_ids = std::sync::Arc::clone(&seen_message_ids);
             let startup_tx = Some(startup_tx);
-            let app = build_webhook_router(verify_token, app_secret, allowed_users, seen_message_ids, tx);
+            let app = build_webhook_router(
+                verify_token,
+                app_secret,
+                allowed_users,
+                seen_message_ids,
+                tx,
+            );
 
             let addr = std::net::SocketAddr::from(([0, 0, 0, 0], port));
             let listener = match tokio::net::TcpListener::bind(addr).await {
@@ -726,7 +732,10 @@ mod tests {
             .unwrap();
         assert_eq!(response.status(), axum::http::StatusCode::OK);
         assert_eq!(
-            to_bytes(response.into_body(), usize::MAX).await.unwrap().as_ref(),
+            to_bytes(response.into_body(), usize::MAX)
+                .await
+                .unwrap()
+                .as_ref(),
             b"abc"
         );
 

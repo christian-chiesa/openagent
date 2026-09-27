@@ -127,13 +127,15 @@ pub struct OpenAgentKernel {
     /// Hand registry — curated autonomous capability packages.
     pub hand_registry: openagent_hands::registry::HandRegistry,
     /// Credential resolver — vault → dotenv → env var priority chain.
-    pub credential_resolver: std::sync::Mutex<openagent_extensions::credentials::CredentialResolver>,
+    pub credential_resolver:
+        std::sync::Mutex<openagent_extensions::credentials::CredentialResolver>,
     /// Extension/integration registry (bundled MCP templates + install state).
     pub extension_registry: std::sync::RwLock<openagent_extensions::registry::IntegrationRegistry>,
     /// Integration health monitor.
     pub extension_health: openagent_extensions::health::HealthMonitor,
     /// Effective MCP server list (manual config + extension-installed, merged at boot).
-    pub effective_mcp_servers: std::sync::RwLock<Vec<openagent_types::config::McpServerConfigEntry>>,
+    pub effective_mcp_servers:
+        std::sync::RwLock<Vec<openagent_types::config::McpServerConfigEntry>>,
     /// Delivery receipt tracker (bounded LRU, max 10K entries).
     pub delivery_tracker: DeliveryTracker,
     /// Cron job scheduler.
@@ -3599,7 +3601,9 @@ impl OpenAgentKernel {
 
         // Post-compaction audit: validate and repair the kept messages
         let (repaired_messages, repair_stats) =
-            openagent_runtime::session_repair::validate_and_repair_with_stats(&result.kept_messages);
+            openagent_runtime::session_repair::validate_and_repair_with_stats(
+                &result.kept_messages,
+            );
 
         // Also update the regular session with the repaired messages
         let mut updated_session = session;
@@ -4444,7 +4448,8 @@ impl OpenAgentKernel {
         }
 
         let agents = self.registry.list();
-        let mut bg_agents: Vec<(openagent_types::agent::AgentId, String, ScheduleMode)> = Vec::new();
+        let mut bg_agents: Vec<(openagent_types::agent::AgentId, String, ScheduleMode)> =
+            Vec::new();
 
         for entry in &agents {
             if matches!(entry.manifest.schedule, ScheduleMode::Reactive) {
@@ -4714,7 +4719,8 @@ impl OpenAgentKernel {
                 let kernel = Arc::clone(self);
                 let agents = a2a_config.external_agents.clone();
                 tokio::spawn(async move {
-                    let discovered = openagent_runtime::a2a::discover_external_agents(&agents).await;
+                    let discovered =
+                        openagent_runtime::a2a::discover_external_agents(&agents).await;
                     if let Ok(mut store) = kernel.a2a_external_agents.lock() {
                         *store = discovered;
                     }
@@ -9160,7 +9166,9 @@ mod tests {
 
     #[test]
     fn test_1188_referenced_providers_walks_mcp_env() {
-        use openagent_types::config::{DefaultModelConfig, McpServerConfigEntry, McpTransportEntry};
+        use openagent_types::config::{
+            DefaultModelConfig, McpServerConfigEntry, McpTransportEntry,
+        };
 
         let tmp = tempfile::tempdir().unwrap();
         let home_dir = tmp.path().join("openagent-1188-mcp");

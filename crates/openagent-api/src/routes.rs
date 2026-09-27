@@ -9406,8 +9406,9 @@ pub async fn update_schedule(
         let mut parsed: Vec<openagent_types::scheduler::CronDeliveryTarget> =
             Vec::with_capacity(arr.len());
         for (idx, t) in arr.iter().enumerate() {
-            match serde_json::from_value::<openagent_types::scheduler::CronDeliveryTarget>(t.clone())
-            {
+            match serde_json::from_value::<openagent_types::scheduler::CronDeliveryTarget>(
+                t.clone(),
+            ) {
                 Ok(dt) => parsed.push(dt),
                 Err(e) => {
                     return (
@@ -10728,7 +10729,9 @@ pub async fn serve_upload(Path(file_id): Path<String>) -> impl IntoResponse {
         );
     }
 
-    let file_path = std::env::temp_dir().join("openagent_uploads").join(&file_id);
+    let file_path = std::env::temp_dir()
+        .join("openagent_uploads")
+        .join(&file_id);
 
     // Look up metadata from registry; fall back to disk probe for generated images
     // (image_generate saves files without registering in UPLOAD_REGISTRY).

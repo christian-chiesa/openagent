@@ -232,9 +232,10 @@ impl SkillRegistry {
                                 skill = %converted.manifest.skill.name,
                                 "Auto-converting SKILL.md to OpenAgent format"
                             );
-                            if let Err(e) =
-                                openclaw_compat::write_openagent_manifest(&path, &converted.manifest)
-                            {
+                            if let Err(e) = openclaw_compat::write_openagent_manifest(
+                                &path,
+                                &converted.manifest,
+                            ) {
                                 warn!("Failed to write skill.toml for {}: {e}", path.display());
                                 continue;
                             }
@@ -417,9 +418,10 @@ impl SkillRegistry {
                                 continue;
                             }
 
-                            if let Err(e) =
-                                openclaw_compat::write_openagent_manifest(&path, &converted.manifest)
-                            {
+                            if let Err(e) = openclaw_compat::write_openagent_manifest(
+                                &path,
+                                &converted.manifest,
+                            ) {
                                 warn!("Failed to write skill.toml for {}: {e}", path.display());
                                 continue;
                             }
