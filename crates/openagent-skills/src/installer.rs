@@ -1,6 +1,6 @@
 //! Skill install enforcement options.
 //!
-//! Wraps the per-source install clients (FangHub `marketplace`, ClawHub) with
+//! Wraps the per-source install clients (AgentHub `marketplace`, ClawHub) with
 //! optional supply-chain gates. The flagship gate is `require_signed`: when
 //! true, an Ed25519 `SignedManifest` envelope must sit alongside the skill
 //! payload and verify cleanly before the install is considered complete.

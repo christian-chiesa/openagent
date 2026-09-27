@@ -1,6 +1,6 @@
 # Skill Development
 
-Skills are pluggable tool bundles that extend agent capabilities in OpenAgent. A skill packages one or more tools with their implementation, letting agents do things that built-in tools do not cover. This guide covers skill creation, the manifest format, Python and WASM runtimes, publishing to FangHub, and CLI management.
+Skills are pluggable tool bundles that extend agent capabilities in OpenAgent. A skill packages one or more tools with their implementation, letting agents do things that built-in tools do not cover. This guide covers skill creation, the manifest format, Python and WASM runtimes, publishing to AgentHub, and CLI management.
 
 ## Table of Contents
 
@@ -10,7 +10,7 @@ Skills are pluggable tool bundles that extend agent capabilities in OpenAgent. A
 - [WASM Skills](#wasm-skills)
 - [Skill Requirements](#skill-requirements)
 - [Installing Skills](#installing-skills)
-- [Publishing to FangHub](#publishing-to-fanghub)
+- [Publishing to AgentHub](#publishing-to-fanghub)
 - [CLI Commands](#cli-commands)
 - [OpenClaw Compatibility](#openclaw-compatibility)
 - [Best Practices](#best-practices)
@@ -136,7 +136,7 @@ capabilities = ["NetConnect(*)"]
 | `description` | string | No | Human-readable description |
 | `author` | string | No | Author name or organization |
 | `license` | string | No | License identifier (e.g., `"MIT"`, `"Apache-2.0"`) |
-| `tags` | array | No | Tags for discovery on FangHub |
+| `tags` | array | No | Tags for discovery on AgentHub |
 
 #### [runtime] -- Execution Configuration
 
@@ -379,13 +379,13 @@ openagent skill install /path/to/my-skill
 
 This reads the `skill.toml`, validates the manifest, and copies the skill to `~/.openagent/skills/my-skill/`.
 
-### From FangHub
+### From AgentHub
 
 ```bash
 openagent skill install web-summarizer
 ```
 
-This downloads the skill from the FangHub marketplace registry.
+This downloads the skill from the AgentHub marketplace registry.
 
 ### From a Git Repository
 
@@ -419,9 +419,9 @@ openagent skill remove web-summarizer
 
 ---
 
-## Publishing to FangHub
+## Publishing to AgentHub
 
-FangHub is the community skill marketplace for OpenAgent.
+AgentHub is the community skill marketplace for OpenAgent.
 
 ### Preparing Your Skill
 
@@ -435,7 +435,7 @@ openagent skill install /path/to/my-skill
 # Spawn an agent with the skill's tools and test them
 ```
 
-### Searching FangHub
+### Searching AgentHub
 
 ```bash
 openagent skill search "web scraping"
@@ -457,13 +457,13 @@ Skills matching "web scraping":
 
 ### Publishing
 
-Publishing to FangHub will be available via:
+Publishing to AgentHub will be available via:
 
 ```bash
 openagent skill publish
 ```
 
-This validates the manifest, packages the skill, and uploads it to the FangHub registry.
+This validates the manifest, packages the skill, and uploads it to the AgentHub registry.
 
 ---
 
@@ -472,7 +472,7 @@ This validates the manifest, packages the skill, and uploads it to the FangHub r
 ### Full Skill Command Reference
 
 ```bash
-# Install a skill (local directory, FangHub name, or git URL)
+# Install a skill (local directory, AgentHub name, or git URL)
 openagent skill install <source>
 
 # List all installed skills
@@ -481,7 +481,7 @@ openagent skill list
 # Remove an installed skill
 openagent skill remove <name>
 
-# Search FangHub for skills
+# Search AgentHub for skills
 openagent skill search <query>
 
 # Create a new skill scaffold (interactive)

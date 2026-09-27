@@ -581,7 +581,7 @@ Loads skills from `~/.openagent/skills/` plus bundled skills compiled into the b
 
 ### openagent skill install
 
-Install a skill from a local directory, git URL, or FangHub marketplace.
+Install a skill from a local directory, git URL, or AgentHub marketplace.
 
 ```
 openagent skill install <SOURCE>
@@ -591,12 +591,12 @@ openagent skill install <SOURCE>
 
 | Argument | Description |
 |---|---|
-| `<SOURCE>` | Skill name (FangHub), local directory path, or git URL. |
+| `<SOURCE>` | Skill name (AgentHub), local directory path, or git URL. |
 
 **Behavior:**
 
 - **Local directory:** Looks for `skill.toml` in the directory. If not found, checks for OpenClaw-format skills (SKILL.md with YAML frontmatter) and auto-converts them.
-- **Remote (FangHub):** Fetches and installs from the FangHub marketplace. Skills pass through SHA256 verification and prompt injection scanning.
+- **Remote (AgentHub):** Fetches and installs from the AgentHub marketplace. Skills pass through SHA256 verification and prompt injection scanning.
 
 **Example:**
 
@@ -604,7 +604,7 @@ openagent skill install <SOURCE>
 # Install from local directory
 openagent skill install ./my-skill/
 
-# Install from FangHub
+# Install from AgentHub
 openagent skill install web-search
 
 # Install an OpenClaw-format skill
@@ -637,7 +637,7 @@ openagent skill remove web-search
 
 ### openagent skill search
 
-Search the FangHub marketplace for skills.
+Search the AgentHub marketplace for skills.
 
 ```
 openagent skill search <QUERY>
@@ -1229,7 +1229,7 @@ openagent trigger delete <TRIGGER_ID>
 ### Skill management
 
 ```bash
-# Search FangHub
+# Search AgentHub
 openagent skill search "code review"
 
 # Install a skill

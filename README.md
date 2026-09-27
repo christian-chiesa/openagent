@@ -104,7 +104,7 @@ openagent hand pause lead
 openagent hand list
 ```
 
-**Build your own.** Define a `HAND.toml` with tools, settings, and a system prompt. Publish to FangHub.
+**Build your own.** Define a `HAND.toml` with tools, settings, and a system prompt. Publish to AgentHub.
 
 ---
 
@@ -239,7 +239,7 @@ openagent-api         140+ REST/WS/SSE endpoints, OpenAI-compatible API, dashboa
 openagent-channels    40 messaging adapters with rate limiting, DM/group policies
 openagent-memory      SQLite persistence, vector embeddings, canonical sessions, compaction
 openagent-types       Core types, taint tracking, Ed25519 manifest signing, model catalog
-openagent-skills      60 bundled skills, SKILL.md parser, FangHub marketplace
+openagent-skills      60 bundled skills, SKILL.md parser, AgentHub marketplace
 openagent-hands       7 autonomous Hands, HAND.toml parser, lifecycle management
 openagent-extensions  25 MCP templates, AES-256-GCM credential vault, OAuth2 PKCE
 openagent-wire        OFP P2P protocol with HMAC-SHA256 mutual authentication
@@ -406,6 +406,8 @@ curl -X POST localhost:4200/v1/chat/completions \
 
 ## Quick Start
 
+### Option 1: One-Line Installer
+
 ```bash
 # 1. Install (macOS/Linux)
 curl -fsSL https://openagent.sh/install | sh
@@ -439,6 +441,32 @@ openagent start
 ```
 
 </details>
+
+### Option 2: Full Build from Source (GitHub Clone)
+
+#### Prerequisites
+- **Rust Toolchain**: Rust 1.75+ installed (`curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`)
+- **Git**
+
+#### Steps
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/RightNow-AI/openagent.git
+cd openagent
+
+# 2. Build in release mode
+cargo build --release -p openagent-cli
+
+# 3. (Optional) Symlink or copy the binary to your PATH
+sudo cp target/release/openagent /usr/local/bin/
+
+# 4. Initialize configuration
+openagent init
+
+# 5. Start OpenAgent
+openagent start
+```
 
 ---
 
