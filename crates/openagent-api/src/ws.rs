@@ -1816,7 +1816,10 @@ mod tests {
         // Cookie signed with the wrong secret must fail.
         let bad = crate::session_auth::create_session_token("alice", "other-secret", 1);
         let mut headers = axum::http::HeaderMap::new();
-        headers.insert("cookie", format!("openagent_session={bad}").parse().unwrap());
+        headers.insert(
+            "cookie",
+            format!("openagent_session={bad}").parse().unwrap(),
+        );
         let uri = empty_uri();
         let ctx = WsAuthCtx {
             api_key: "secret",

@@ -4147,7 +4147,9 @@ fn cmd_channel_setup(channel: Option<&str>) {
                     Err(_) => println!("    export EMAIL_PASSWORD=your_app_password"),
                 }
             } else {
-                ui::hint("Set later: openagent config set-key email (or export EMAIL_PASSWORD=...)");
+                ui::hint(
+                    "Set later: openagent config set-key email (or export EMAIL_PASSWORD=...)",
+                );
             }
 
             ui::blank();
@@ -6787,7 +6789,10 @@ fn cmd_reset(confirm: bool) {
     match std::fs::remove_dir_all(&openagent_dir) {
         Ok(()) => ui::success(&format!("Removed {}", openagent_dir.display())),
         Err(e) => {
-            ui::error(&format!("Failed to remove {}: {e}", openagent_dir.display()));
+            ui::error(&format!(
+                "Failed to remove {}: {e}",
+                openagent_dir.display()
+            ));
             std::process::exit(1);
         }
     }
@@ -6884,7 +6889,10 @@ fn cmd_uninstall(confirm: bool, keep_config: bool) {
         } else {
             match std::fs::remove_dir_all(&openagent_dir) {
                 Ok(()) => ui::success(&format!("Removed {}", openagent_dir.display())),
-                Err(e) => ui::error(&format!("Failed to remove {}: {e}", openagent_dir.display())),
+                Err(e) => ui::error(&format!(
+                    "Failed to remove {}: {e}",
+                    openagent_dir.display()
+                )),
             }
         }
     }
@@ -7059,7 +7067,8 @@ fn clean_path_entries(home: &std::path::Path, openagent_dir: &str) {
 #[cfg(any(not(windows), test))]
 fn is_openagent_path_line(line: &str, openagent_dir: &str) -> bool {
     let lower = line.to_lowercase();
-    let has_openagent = lower.contains("openagent") || lower.contains(&openagent_dir.to_lowercase());
+    let has_openagent =
+        lower.contains("openagent") || lower.contains(&openagent_dir.to_lowercase());
     if !has_openagent {
         return false;
     }

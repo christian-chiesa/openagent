@@ -1584,22 +1584,21 @@ fn migrate_channels_from_json(
                     );
                 }
             }
-            let mut fields: Vec<(&str, toml::Value)> = vec![(
-                "access_token_env",
-                toml::Value::String("WHATSAPP_ACCESS_TOKEN".into()),
-            ),
-            (
-                "phone_number_id",
-                toml::Value::String(String::new()),
-            ),
-            (
-                "verify_token_env",
-                toml::Value::String("WHATSAPP_VERIFY_TOKEN".into()),
-            ),
-            (
-                "app_secret_env",
-                toml::Value::String("WHATSAPP_APP_SECRET".into()),
-            )];
+            let mut fields: Vec<(&str, toml::Value)> = vec![
+                (
+                    "access_token_env",
+                    toml::Value::String("WHATSAPP_ACCESS_TOKEN".into()),
+                ),
+                ("phone_number_id", toml::Value::String(String::new())),
+                (
+                    "verify_token_env",
+                    toml::Value::String("WHATSAPP_VERIFY_TOKEN".into()),
+                ),
+                (
+                    "app_secret_env",
+                    toml::Value::String("WHATSAPP_APP_SECRET".into()),
+                ),
+            ];
             report.warnings.push(
                 "WhatsApp migration requires phone_number_id, verify token, and Meta app secret for Cloud API webhooks"
                     .to_string(),
@@ -2486,7 +2485,8 @@ fn report_skipped_features(root: &OpenClawRoot, source: &Path, report: &mut Migr
         report.skipped.push(SkippedItem {
             kind: ItemKind::Config,
             name: "hooks".to_string(),
-            reason: "Webhook hooks not supported — use OpenAgent's event system instead".to_string(),
+            reason: "Webhook hooks not supported — use OpenAgent's event system instead"
+                .to_string(),
         });
     }
 
@@ -3264,8 +3264,9 @@ fn scan_legacy_skills(source: &Path, report: &mut MigrationReport) {
                     report.skipped.push(SkippedItem {
                         kind: ItemKind::Skill,
                         name: name.clone(),
-                        reason: "Node.js skill — run with `openagent skill install` after migration"
-                            .to_string(),
+                        reason:
+                            "Node.js skill — run with `openagent skill install` after migration"
+                                .to_string(),
                     });
                 } else {
                     report.skipped.push(SkippedItem {
